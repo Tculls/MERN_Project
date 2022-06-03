@@ -25,14 +25,14 @@ const Dashboard = () => {
     .catch((error) =>{
 
     });
-    // useEffect(() => {
-    //     axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=5KJPN7RQH39HLT5N`)
-    //     .then(response=>{
-    //         console.log(response.data)
-    //         setStocks(response.data)
-    //     })
-    //     .catch(err=> console.log(err))
-    // })
+    useEffect(() => {
+        axios.get(`https://api.twelvedata.com/time_series?symbol=AAPL,EUR/USD,ETH/BTC:Huobi,TRP:TSX&interval=1min&apikey=bef906f480804f6499671ac7acc4854e`)
+        .then(response=>{
+            console.log(response.data)
+            setStocks(response.data)
+        })
+        .catch(err=> console.log(err))
+    })
 
     return (
         <div className="App">
