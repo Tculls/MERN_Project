@@ -3,6 +3,7 @@ import {BrowserRouter, Routes, Route, Link} from "react-router-dom"
 import Dashboard from "./views/Dashboard";
 import GetOne from './views/GetOne'
 
+
 function App() {
   return(
   <div className="App">

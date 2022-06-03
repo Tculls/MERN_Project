@@ -1,10 +1,30 @@
-import React from 'react'
-import {useEffect, useState, useParams} from "react"
-import axios from "axios"
+import React from 'react';
+import {useEffect, useState, useParams} from "react";
+import axios from "axios";
+import TwelveData from "twelvedata";
+
 
 
 const Dashboard = () => {
+    const TwelveData = require("twelvedata")
     const [stocks, setStocks] = useState([])
+    const config = {
+        key: "bef906f480804f6499671ac7acc4854e"
+    };
+    const client = TwelveData(config);
+    let params = {
+        symbol: "AAPL",
+        interval: "1min",
+        outputsize: 5,
+    };
+    client
+    .timeSeries(params)
+    .then((data) =>{
+
+    })
+    .catch((error) =>{
+
+    });
     // useEffect(() => {
     //     axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=5KJPN7RQH39HLT5N`)
     //     .then(response=>{
@@ -44,11 +64,13 @@ const Dashboard = () => {
                     <h4>Dow Jones</h4>
                 </div>
             </div>
+<script type="module" src="./app.js"></script>
         </div>
+        
     );
 }
 
 
 export default Dashboard
 
-//  Alpha Vantage 5KJPN7RQH39HLT5N
+//  TwelveData bef906f480804f6499671ac7acc4854e
