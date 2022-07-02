@@ -1,65 +1,39 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate} from "react-router-dom";
 
 const Register = () => {
     const [user, setUser] = useState({
-        name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         password: ""
+        
     })
-    const handleChange = e => {
-        const { name, value } = e.target
-        setUser({
-            ...user,
-            [name]: value
-        })
+    const navigate= useNavigate()
+    const handleSubmit=(e) =>{
+        setUser({...user, [e.target.name]: e.target.value})
+        e.preventDefault()
+        axios.post(`http://localhost:8000/api/user`, user)
+        .then(()=>navigate('/'))
+        .catch(err=>console.log(err))
+        
     }
-    const Reg = () => {
-        const { name, email, password } = user
-        if (name && email && password) {
-            axios.post("http://localhost:3000/new", user)
-                .then(res => console.log(res))
-        }
-        else {
-            alert("invalid input")
-        };
-        return (
-            <div class="flex flex-col max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
-                <div class="self-center mb-2 text-xl font-light text-gray-800 sm:text-2xl dark:text-white">
-                    Create a new account
-                </div>
-                <span class="justify-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400">
-                    Already have an account ?
-                    <a href="#" target="_blank" class="text-sm text-blue-500 underline hover:text-blue-700">
-                        Sign in
-                    </a>
-                </span>
-                <div class="p-6 mt-8">
-                    <form action="#">
-                        <div class="flex flex-col mb-2">
-                            <div class=" relative ">
-                                <input type="text" id="create-account-pseudo" class="" name="name" value={user.name} onChange={handleChange} placeholder="FullName" />
-                            </div>
-                        </div>
-                        <div class="flex gap-4 mb-2">
-                            <div class=" relative ">
-                                <input type="text" id="create-account-first-name" class="" name="email" value={user.email} onChange={handleChange} placeholder="Email" />
-                            </div>
-                        </div>
-                        <div class="flex flex-col mb-2">
-                            <div class=" relative ">
-                                <input type="password" id="create-account-email" class="" name="password" value={user.password} onChange={handleChange} placeholder="password" />
-                            </div>
-                        </div>
-                        <div class="flex w-full my-4">
-                            <button type="submit" class=" " onClick={Reg} >
-                                Register
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        )
-    }
+
+    return(
+        <div>
+            <h1>Register</h1>
+
+            <form onSubmit={handleSubmit}>
+                <input  value={user.firstName} onChange={(e) => setUser(e.target.value)} type="text" placeholder="First Name" ></input>
+                <input value={user.lastName} onChange={(e) => setUser(e.target.value)} type="text" placeholder="Last Name" ></input>
+                <input value={user.email} onChange={(e) => setUser(e.target.value)} type="email" placeholder="Email"></input>
+                <input value={user.password} onChange={(e) => setUser(e.target.value)} type="password" placeholder="Password"></input>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    )
+
 }
+
 export default Register
