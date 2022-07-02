@@ -1,5 +1,24 @@
 {
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "twelvedata": "^3.0.0"
-  }
+  },
+  "name": "mern_project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tculls/MERN_Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tculls/MERN_Project/issues"
+  },
+  "homepage": "https://github.com/Tculls/MERN_Project#readme",
+  "description": ""
 }
