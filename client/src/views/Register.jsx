@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate} from "react-router-dom";
 
+
 const Register = () => {
     const [user, setUser] = useState({
         firstName: "",
@@ -16,7 +17,15 @@ const Register = () => {
         e.preventDefault()
         axios.post(`http://localhost:8000/api/user`, user)
         .then(()=>navigate('/'))
-        .catch(err=>console.log(err))
+        .catch(err=> {
+            console.log(err.response.data.errors)
+            const errArr=[]
+            const errObject = err.response.data.errors
+            for (const errKey in errObject){
+                errArr.push(errObject[errKey]["message"])
+            }
+            setErrors(setArr)
+        })
         
     }
 

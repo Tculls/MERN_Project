@@ -1,3 +1,5 @@
+const mongoose = require("mongoose")
+
 const bcrypt = require('bcrypt');
 
 UserSchema.pre('save', function(next) {
@@ -11,11 +13,13 @@ UserSchema.pre('save', function(next) {
 const UserSchema = new mongoose.Schema({
     firstName: {
       type: String,
-      required: [true, "First name is required"]
+      required: [true, "First name is required"],
+      minlength: [3, "First Name must be at least 3 characters"]
     },
     lastName: {
       type: String,
-      required: [true, "Last name is required"]
+      required: [true, "Last name is required"],
+      minlength: [3, "Last Name must be at least 3 characters"]
     },
     email: {
       type: String,
@@ -43,3 +47,5 @@ const UserSchema = new mongoose.Schema({
     }
     next();
   });
+
+module.exports.Register = mongoose.model("Register", UserSchema)
